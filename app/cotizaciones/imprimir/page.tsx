@@ -290,7 +290,7 @@ export default function ImprimirCotizacionPage() {
 
         {/* Información del Cliente y Equipo */}
         <Grid container spacing={4} sx={{ mb: 4 }}>
-          <Grid item xs={12} md={6}>
+          <Grid xs={12} md={6}>
             <Typography
               variant="h6"
               gutterBottom
@@ -306,7 +306,7 @@ export default function ImprimirCotizacionPage() {
             </Typography>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid xs={12} md={6}>
             <Typography
               variant="h6"
               gutterBottom
@@ -382,7 +382,7 @@ export default function ImprimirCotizacionPage() {
 
         {/* Información Técnica */}
         <Grid container spacing={4} sx={{ mb: 4 }}>
-          <Grid item xs={12} md={6}>
+          <Grid xs={12} md={6}>
             <Typography
               variant="h6"
               gutterBottom
@@ -402,7 +402,7 @@ export default function ImprimirCotizacionPage() {
             </Typography>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid xs={12} md={6}>
             <Typography
               variant="h6"
               gutterBottom
@@ -516,7 +516,7 @@ export default function ImprimirCotizacionPage() {
           spacing={4}
           sx={{ mt: 4, pt: 4, borderTop: "1px dashed #ccc" }}
         >
-          <Grid item xs={6}>
+          <Grid xs={6}>
             <Box sx={{ textAlign: "center" }}>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 6 }}>
                 _________________________
@@ -532,7 +532,7 @@ export default function ImprimirCotizacionPage() {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid xs={6}>
             <Box sx={{ textAlign: "center" }}>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 6 }}>
                 _________________________

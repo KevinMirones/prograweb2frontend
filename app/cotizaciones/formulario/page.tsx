@@ -521,12 +521,12 @@ export default function FormularioCotizacionPage() {
           <form onSubmit={handleSubmit}>
             <Grid container spacing={4}>
               {/* Información del Cliente y Equipo */}
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <Typography variant="h6" gutterBottom sx={{ color: "#7b1fa2" }}>
                   Información del Cliente y Equipo
                 </Typography>
                 <Grid container spacing={3}>
-                  <Grid item xs={12} md={6}>
+                  <Grid xs={12} md={6}>
                     <FormControl fullWidth disabled={isViewMode || loading}>
                       <InputLabel>Cliente *</InputLabel>
                       <Select
@@ -556,7 +556,7 @@ export default function FormularioCotizacionPage() {
                     )}
                   </Grid>
 
-                  <Grid item xs={12} md={6}>
+                  <Grid xs={12} md={6}>
                     <FormControl fullWidth disabled={isViewMode || loading}>
                       <InputLabel>Equipo *</InputLabel>
                       <Select
@@ -590,12 +590,12 @@ export default function FormularioCotizacionPage() {
               </Grid>
 
               {/* Información Técnica */}
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <Typography variant="h6" gutterBottom sx={{ color: "#7b1fa2" }}>
                   Información Técnica
                 </Typography>
                 <Grid container spacing={3}>
-                  <Grid item xs={12} md={6}>
+                  <Grid xs={12} md={6}>
                     <FormControl fullWidth disabled={isViewMode || loading}>
                       <InputLabel>Técnico *</InputLabel>
                       <Select
@@ -625,7 +625,7 @@ export default function FormularioCotizacionPage() {
                     )}
                   </Grid>
 
-                  <Grid item xs={12} md={6}>
+                  <Grid xs={12} md={6}>
                     <TextField
                       fullWidth
                       label="Fecha de Expiración"
@@ -643,12 +643,12 @@ export default function FormularioCotizacionPage() {
               </Grid>
 
               {/* Descripción de la Falla y Diagnóstico */}
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <Typography variant="h6" gutterBottom sx={{ color: "#7b1fa2" }}>
                   Descripción del Servicio
                 </Typography>
                 <Grid container spacing={3}>
-                  <Grid item xs={12}>
+                  <Grid xs={12}>
                     <TextField
                       fullWidth
                       label="Descripción de la Falla"
@@ -663,7 +663,7 @@ export default function FormularioCotizacionPage() {
                       placeholder="Describa detalladamente la falla o problema reportado por el cliente..."
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid xs={12}>
                     <TextField
                       fullWidth
                       label="Diagnóstico Técnico"
@@ -682,12 +682,12 @@ export default function FormularioCotizacionPage() {
               </Grid>
 
               {/* Información de Precio y Estado */}
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <Typography variant="h6" gutterBottom sx={{ color: "#7b1fa2" }}>
                   Información de Costo
                 </Typography>
                 <Grid container spacing={3}>
-                  <Grid item xs={12} md={6}>
+                  <Grid xs={12} md={6}>
                     <TextField
                       fullWidth
                       label="Precio Total"
@@ -709,7 +709,7 @@ export default function FormularioCotizacionPage() {
                     />
                   </Grid>
 
-                  <Grid item xs={12} md={6}>
+                  <Grid xs={12} md={6}>
                     <FormControl fullWidth disabled={isViewMode || loading}>
                       <InputLabel>Estado</InputLabel>
                       <Select
@@ -731,7 +731,7 @@ export default function FormularioCotizacionPage() {
 
               {/* Resumen del Precio */}
               {cotizacion.precio_total > 0 && (
-                <Grid item xs={12}>
+                <Grid xs={12}>
                   <Card
                     sx={{ bgcolor: "#f3e5f5", border: "2px solid #7b1fa2" }}
                   >
@@ -758,7 +758,7 @@ export default function FormularioCotizacionPage() {
               )}
 
               {!isViewMode && (
-                <Grid item xs={12}>
+                <Grid xs={12}>
                   <Box display="flex" gap={2} justifyContent="flex-end" mt={2}>
                     <Button
                       type="button"
@@ -806,7 +806,7 @@ export default function FormularioCotizacionPage() {
         <DialogTitle>Nuevo Cliente</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <TextField
                 fullWidth
                 label="Nombre"
@@ -816,7 +816,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Apellido Paterno"
@@ -829,7 +829,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Apellido Materno"
@@ -842,7 +842,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <TextField
                 fullWidth
                 label="Teléfono"
@@ -872,7 +872,7 @@ export default function FormularioCotizacionPage() {
         <DialogTitle>Nuevo Equipo</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Marca"
@@ -882,7 +882,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Modelo"
@@ -892,7 +892,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <FormControl fullWidth>
                 <InputLabel>Tipo de Equipo</InputLabel>
                 <Select
@@ -914,7 +914,7 @@ export default function FormularioCotizacionPage() {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <FormControl fullWidth>
                 <InputLabel>Dueño</InputLabel>
                 <Select
@@ -956,7 +956,7 @@ export default function FormularioCotizacionPage() {
         <DialogTitle>Nuevo Técnico</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <TextField
                 fullWidth
                 label="Nombre"
@@ -966,7 +966,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Apellido Paterno"
@@ -979,7 +979,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Apellido Materno"
@@ -992,7 +992,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Teléfono"
@@ -1002,7 +1002,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Fecha de Ingreso"

@@ -223,7 +223,7 @@ export default function FormularioTecnicoPage() {
         ) : (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
+              <Grid xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label="Nombre"
@@ -236,7 +236,7 @@ export default function FormularioTecnicoPage() {
                 />
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              <Grid xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label="Apellido Paterno"
@@ -249,7 +249,7 @@ export default function FormularioTecnicoPage() {
                 />
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              <Grid xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label="Apellido Materno"
@@ -261,7 +261,7 @@ export default function FormularioTecnicoPage() {
                 />
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              <Grid xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label="Teléfono"
@@ -274,7 +274,7 @@ export default function FormularioTecnicoPage() {
                 />
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <TextField
                   fullWidth
                   label="Fecha de Ingreso"
@@ -292,7 +292,7 @@ export default function FormularioTecnicoPage() {
               </Grid>
 
               {!isViewMode && (
-                <Grid item xs={12}>
+                <Grid xs={12}>
                   <Box display="flex" gap={2} justifyContent="flex-end" mt={2}>
                     <Button
                       type="button"

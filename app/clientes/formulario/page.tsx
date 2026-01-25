@@ -8,10 +8,10 @@ import {
   TextField,
   Button,
   Paper,
-  Grid,
   Divider,
   Alert,
   CircularProgress,
+  Grid,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SaveIcon from "@mui/icons-material/Save";
@@ -180,7 +180,7 @@ export default function FormularioClientePage() {
         ) : (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
+              <Grid xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label="Nombre"
@@ -192,8 +192,8 @@ export default function FormularioClientePage() {
                   variant={isViewMode ? "filled" : "outlined"}
                 />
               </Grid>
-
-              <Grid item xs={12} sm={6}>
+          
+              <Grid xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label="Apellido Paterno"
@@ -206,7 +206,7 @@ export default function FormularioClientePage() {
                 />
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              <Grid xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label="Apellido Materno"
@@ -218,7 +218,7 @@ export default function FormularioClientePage() {
                 />
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              <Grid xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label="Teléfono"
@@ -232,7 +232,7 @@ export default function FormularioClientePage() {
               </Grid>
 
               {!isViewMode && (
-                <Grid item xs={12}>
+                <Grid xs={12}>
                   <Box display="flex" gap={2} justifyContent="flex-end" mt={2}>
                     <Button
                       type="button"
