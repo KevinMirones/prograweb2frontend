@@ -116,9 +116,9 @@ export default function FormularioTrabajoPage() {
     fecha_ingreso: new Date().toISOString().split("T")[0],
   });
 
-  const API_URL = "http://172.25.2.45:8080/api/v1/trabajos";
-  const TECNICOS_URL = "http://172.25.2.45:8080/api/v1/tecnicos";
-  const COTIZACIONES_URL = "http://172.25.2.45:8080/api/v1/cotizaciones";
+  const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/trabajos`;
+  const TECNICOS_URL = `${process.env.NEXT_PUBLIC_API_URL}/tecnicos`;
+  const COTIZACIONES_URL = `${process.env.NEXT_PUBLIC_API_URL}/cotizaciones`;
 
   // Estados válidos
   const ESTADOS_VALIDOS = [

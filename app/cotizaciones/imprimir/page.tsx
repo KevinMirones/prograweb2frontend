@@ -88,7 +88,7 @@ export default function ImprimirCotizacionPage() {
   const cargarCotizacion = async () => {
     try {
       const response = await fetch(
-        `http://172.25.2.45:8080/api/v1/cotizaciones/${id}`
+        `${process.env.NEXT_PUBLIC_API_URL}/cotizaciones/${id}`
       );
       if (!response.ok) throw new Error("Error al cargar cotización");
 

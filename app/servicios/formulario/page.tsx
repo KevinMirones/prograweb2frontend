@@ -46,7 +46,7 @@ export default function FormularioServicioPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const API_URL = "http://172.25.2.45:8080/api/v1/servicios";
+  const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/servicios`;
 
   // Cargar datos del servicio si es edición o visualización
   useEffect(() => {

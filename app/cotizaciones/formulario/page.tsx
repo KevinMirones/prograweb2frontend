@@ -143,11 +143,11 @@ export default function FormularioCotizacionPage() {
     fecha_ingreso: new Date().toISOString().split("T")[0],
   });
 
-  const API_URL = "http://172.25.2.45:8080/api/v1/cotizaciones";
-  const CLIENTES_URL = "http://172.25.2.45:8080/api/v1/clientes";
-  const TECNICOS_URL = "http://172.25.2.45:8080/api/v1/tecnicos";
-  const EQUIPOS_URL = "http://172.25.2.45:8080/api/v1/equipos";
-  const TIPOS_EQUIPO_URL = "http://172.25.2.45:8080/api/v1/tipos_equipo";
+  const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/cotizaciones`;
+  const CLIENTES_URL = `${process.env.NEXT_PUBLIC_API_URL}/clientes`;
+  const TECNICOS_URL = `${process.env.NEXT_PUBLIC_API_URL}/tecnicos`;
+  const EQUIPOS_URL = `${process.env.NEXT_PUBLIC_API_URL}/equipos`;
+  const TIPOS_EQUIPO_URL = `${process.env.NEXT_PUBLIC_API_URL}/tipos_equipo`;
 
   // Cargar datos iniciales
   useEffect(() => {

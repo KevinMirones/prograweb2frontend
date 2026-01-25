@@ -50,7 +50,7 @@ export default function FormularioTecnicoPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const API_URL = "http://172.25.2.45:8080/api/v1/tecnicos";
+  const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/tecnicos`;
 
   // Cargar datos del técnico si es edición o visualización
   useEffect(() => {

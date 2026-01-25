@@ -62,7 +62,7 @@ export default function TrabajosPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const API_URL = "http://172.25.2.45:8080/api/v1/trabajos";
+  const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/trabajos`;
 
   // 🔄 Cargar trabajos desde la API
   const cargarTrabajos = async () => {
