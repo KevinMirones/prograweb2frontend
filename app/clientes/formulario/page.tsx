@@ -180,7 +180,7 @@ export default function FormularioClientePage() {
         ) : (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
-              <Grid xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   label="Nombre"
@@ -193,7 +193,7 @@ export default function FormularioClientePage() {
                 />
               </Grid>
           
-              <Grid xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   label="Apellido Paterno"
@@ -206,7 +206,7 @@ export default function FormularioClientePage() {
                 />
               </Grid>
 
-              <Grid xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   label="Apellido Materno"
@@ -218,7 +218,7 @@ export default function FormularioClientePage() {
                 />
               </Grid>
 
-              <Grid xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   label="Teléfono"
@@ -232,7 +232,7 @@ export default function FormularioClientePage() {
               </Grid>
 
               {!isViewMode && (
-                <Grid xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <Box display="flex" gap={2} justifyContent="flex-end" mt={2}>
                     <Button
                       type="button"

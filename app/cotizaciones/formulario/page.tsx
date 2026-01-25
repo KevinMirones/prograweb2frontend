@@ -20,20 +20,14 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Stepper,
-  Step,
-  StepLabel,
   Card,
   CardContent,
   InputAdornment,
-  Tab,
-  Tabs,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SaveIcon from "@mui/icons-material/Save";
 import AddIcon from "@mui/icons-material/Add";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 // Interfaces
 interface Cliente {
@@ -520,13 +514,13 @@ export default function FormularioCotizacionPage() {
         ) : (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={4}>
-              {/* Información del Cliente y Equipo */}
-              <Grid xs={12}>
+              {/* Sección 1: Información del Cliente y Equipo */}
+              <Grid size={{ xs: 12 }}>
                 <Typography variant="h6" gutterBottom sx={{ color: "#7b1fa2" }}>
                   Información del Cliente y Equipo
                 </Typography>
                 <Grid container spacing={3}>
-                  <Grid xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <FormControl fullWidth disabled={isViewMode || loading}>
                       <InputLabel>Cliente *</InputLabel>
                       <Select
@@ -556,7 +550,7 @@ export default function FormularioCotizacionPage() {
                     )}
                   </Grid>
 
-                  <Grid xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <FormControl fullWidth disabled={isViewMode || loading}>
                       <InputLabel>Equipo *</InputLabel>
                       <Select
@@ -589,13 +583,13 @@ export default function FormularioCotizacionPage() {
                 </Grid>
               </Grid>
 
-              {/* Información Técnica */}
-              <Grid xs={12}>
+              {/* Sección 2: Información Técnica */}
+              <Grid size={{ xs: 12 }}>
                 <Typography variant="h6" gutterBottom sx={{ color: "#7b1fa2" }}>
                   Información Técnica
                 </Typography>
                 <Grid container spacing={3}>
-                  <Grid xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <FormControl fullWidth disabled={isViewMode || loading}>
                       <InputLabel>Técnico *</InputLabel>
                       <Select
@@ -625,7 +619,7 @@ export default function FormularioCotizacionPage() {
                     )}
                   </Grid>
 
-                  <Grid xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <TextField
                       fullWidth
                       label="Fecha de Expiración"
@@ -642,13 +636,13 @@ export default function FormularioCotizacionPage() {
                 </Grid>
               </Grid>
 
-              {/* Descripción de la Falla y Diagnóstico */}
-              <Grid xs={12}>
+              {/* Sección 3: Descripción de la Falla y Diagnóstico */}
+              <Grid size={{ xs: 12 }}>
                 <Typography variant="h6" gutterBottom sx={{ color: "#7b1fa2" }}>
                   Descripción del Servicio
                 </Typography>
                 <Grid container spacing={3}>
-                  <Grid xs={12}>
+                  <Grid size={{ xs: 12 }}>
                     <TextField
                       fullWidth
                       label="Descripción de la Falla"
@@ -663,7 +657,7 @@ export default function FormularioCotizacionPage() {
                       placeholder="Describa detalladamente la falla o problema reportado por el cliente..."
                     />
                   </Grid>
-                  <Grid xs={12}>
+                  <Grid size={{ xs: 12 }}>
                     <TextField
                       fullWidth
                       label="Diagnóstico Técnico"
@@ -681,13 +675,13 @@ export default function FormularioCotizacionPage() {
                 </Grid>
               </Grid>
 
-              {/* Información de Precio y Estado */}
-              <Grid xs={12}>
+              {/* Sección 4: Información de Precio y Estado */}
+              <Grid size={{ xs: 12 }}>
                 <Typography variant="h6" gutterBottom sx={{ color: "#7b1fa2" }}>
                   Información de Costo
                 </Typography>
                 <Grid container spacing={3}>
-                  <Grid xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <TextField
                       fullWidth
                       label="Precio Total"
@@ -709,7 +703,7 @@ export default function FormularioCotizacionPage() {
                     />
                   </Grid>
 
-                  <Grid xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <FormControl fullWidth disabled={isViewMode || loading}>
                       <InputLabel>Estado</InputLabel>
                       <Select
@@ -731,7 +725,7 @@ export default function FormularioCotizacionPage() {
 
               {/* Resumen del Precio */}
               {cotizacion.precio_total > 0 && (
-                <Grid xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <Card
                     sx={{ bgcolor: "#f3e5f5", border: "2px solid #7b1fa2" }}
                   >
@@ -757,8 +751,9 @@ export default function FormularioCotizacionPage() {
                 </Grid>
               )}
 
+              {/* Botones de acción */}
               {!isViewMode && (
-                <Grid xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <Box display="flex" gap={2} justifyContent="flex-end" mt={2}>
                     <Button
                       type="button"
@@ -806,7 +801,7 @@ export default function FormularioCotizacionPage() {
         <DialogTitle>Nuevo Cliente</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 fullWidth
                 label="Nombre"
@@ -816,7 +811,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Apellido Paterno"
@@ -829,7 +824,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Apellido Materno"
@@ -842,7 +837,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 fullWidth
                 label="Teléfono"
@@ -872,7 +867,7 @@ export default function FormularioCotizacionPage() {
         <DialogTitle>Nuevo Equipo</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Marca"
@@ -882,7 +877,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Modelo"
@@ -892,7 +887,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid xs={12}>
+            <Grid size={{ xs: 12 }}>
               <FormControl fullWidth>
                 <InputLabel>Tipo de Equipo</InputLabel>
                 <Select
@@ -914,7 +909,7 @@ export default function FormularioCotizacionPage() {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid xs={12}>
+            <Grid size={{ xs: 12 }}>
               <FormControl fullWidth>
                 <InputLabel>Dueño</InputLabel>
                 <Select
@@ -956,7 +951,7 @@ export default function FormularioCotizacionPage() {
         <DialogTitle>Nuevo Técnico</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 fullWidth
                 label="Nombre"
@@ -966,7 +961,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Apellido Paterno"
@@ -979,7 +974,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Apellido Materno"
@@ -992,7 +987,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Teléfono"
@@ -1002,7 +997,7 @@ export default function FormularioCotizacionPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Fecha de Ingreso"

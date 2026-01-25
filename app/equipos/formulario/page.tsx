@@ -299,7 +299,7 @@ export default function FormularioEquipoPage() {
         ) : (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
-              <Grid xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   label="Marca"
@@ -312,7 +312,7 @@ export default function FormularioEquipoPage() {
                 />
               </Grid>
 
-              <Grid xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   label="Modelo"
@@ -325,7 +325,7 @@ export default function FormularioEquipoPage() {
                 />
               </Grid>
 
-              <Grid xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <FormControl fullWidth disabled={isViewMode || loading}>
                   <InputLabel>Tipo de Equipo *</InputLabel>
                   <Select
@@ -345,7 +345,7 @@ export default function FormularioEquipoPage() {
                 </FormControl>
               </Grid>
 
-              <Grid xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <FormControl fullWidth disabled={isViewMode || loading}>
                   <InputLabel>Dueño *</InputLabel>
                   <Select
@@ -366,7 +366,7 @@ export default function FormularioEquipoPage() {
               </Grid>
 
               {accion === "editar" && (
-                <Grid xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <FormControl fullWidth disabled={loading}>
                     <InputLabel>Estado</InputLabel>
                     <Select
@@ -387,7 +387,7 @@ export default function FormularioEquipoPage() {
               )}
 
               {!isViewMode && (
-                <Grid xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <Box display="flex" gap={2} justifyContent="flex-end" mt={2}>
                     <Button
                       type="button"

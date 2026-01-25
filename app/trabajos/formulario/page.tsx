@@ -562,7 +562,7 @@ export default function FormularioTrabajoPage() {
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
               {/* Asignación de Cotización */}
-              <Grid xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -622,7 +622,7 @@ export default function FormularioTrabajoPage() {
                             Información de la Cotización Seleccionada
                           </Typography>
                           <Grid container spacing={2}>
-                            <Grid xs={12} md={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                               <Box display="flex" alignItems="center" gap={1}>
                                 <PersonIcon color="action" />
                                 <Typography>
@@ -639,7 +639,7 @@ export default function FormularioTrabajoPage() {
                                 Tel: {cotizacionSeleccionada.cliente.telefono}
                               </Typography>
                             </Grid>
-                            <Grid xs={12} md={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                               <Box display="flex" alignItems="center" gap={1}>
                                 <SmartphoneIcon color="action" />
                                 <Typography>
@@ -659,13 +659,13 @@ export default function FormularioTrabajoPage() {
                                 }
                               </Typography>
                             </Grid>
-                            <Grid xs={12}>
+                            <Grid size={{ xs: 12 }}>
                               <Typography>
                                 <strong>Diagnóstico:</strong>{" "}
                                 {cotizacionSeleccionada.diagnostico}
                               </Typography>
                             </Grid>
-                            <Grid xs={12}>
+                            <Grid size={{ xs: 12 }}>
                               <Typography variant="h6" color="success.main">
                                 <AttachMoneyIcon /> Precio cotizado:{" "}
                                 {new Intl.NumberFormat("es-BO", {
@@ -683,7 +683,7 @@ export default function FormularioTrabajoPage() {
               </Grid>
 
               {/* Descripción */}
-              <Grid xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <TextField
                   fullWidth
                   label="Descripción del Trabajo"
@@ -700,7 +700,7 @@ export default function FormularioTrabajoPage() {
               </Grid>
 
               {/* Información del Técnico */}
-              <Grid xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <FormControl fullWidth disabled={isViewMode || loading}>
                   <InputLabel>Técnico *</InputLabel>
                   <Select
@@ -731,7 +731,7 @@ export default function FormularioTrabajoPage() {
               </Grid>
 
               {/* Estado */}
-              <Grid xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <FormControl fullWidth disabled={isViewMode || loading}>
                   <InputLabel>Estado</InputLabel>
                   <Select
@@ -750,7 +750,7 @@ export default function FormularioTrabajoPage() {
               </Grid>
 
               {/* Fechas */}
-              <Grid xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Fecha de Inicio"
@@ -765,7 +765,7 @@ export default function FormularioTrabajoPage() {
                 />
               </Grid>
 
-              <Grid xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Fecha de Fin (Opcional)"
@@ -780,7 +780,7 @@ export default function FormularioTrabajoPage() {
               </Grid>
 
               {/* Costo */}
-              <Grid xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Costo"
@@ -804,7 +804,7 @@ export default function FormularioTrabajoPage() {
               </Grid>
 
               {!isViewMode && (
-                <Grid xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <Box display="flex" gap={2} justifyContent="flex-end" mt={2}>
                     <Button
                       type="button"
@@ -854,7 +854,7 @@ export default function FormularioTrabajoPage() {
         <DialogTitle>Nuevo Técnico</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 fullWidth
                 label="Nombre"
@@ -864,7 +864,7 @@ export default function FormularioTrabajoPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Apellido Paterno"
@@ -877,7 +877,7 @@ export default function FormularioTrabajoPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Apellido Materno"
@@ -890,7 +890,7 @@ export default function FormularioTrabajoPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Teléfono"
@@ -900,7 +900,7 @@ export default function FormularioTrabajoPage() {
                 }
               />
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Fecha de Ingreso"

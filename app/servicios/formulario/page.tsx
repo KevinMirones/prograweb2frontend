@@ -218,7 +218,7 @@ export default function FormularioServicioPage() {
         ) : (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
-              <Grid xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <TextField
                   fullWidth
                   label="Nombre del Servicio"
@@ -232,7 +232,7 @@ export default function FormularioServicioPage() {
                 />
               </Grid>
 
-              <Grid xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <TextField
                   fullWidth
                   label="Descripción"
@@ -248,7 +248,7 @@ export default function FormularioServicioPage() {
                 />
               </Grid>
 
-              <Grid xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   label="Precio"
@@ -274,7 +274,7 @@ export default function FormularioServicioPage() {
                 />
               </Grid>
 
-              <Grid xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <Box sx={{ p: 2, bgcolor: "#f5f5f5", borderRadius: 1 }}>
                   <Typography variant="subtitle2" color="text.secondary">
                     Precio formateado:
@@ -289,7 +289,7 @@ export default function FormularioServicioPage() {
               </Grid>
 
               {!isViewMode && (
-                <Grid xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <Box display="flex" gap={2} justifyContent="flex-end" mt={2}>
                     <Button
                       type="button"
