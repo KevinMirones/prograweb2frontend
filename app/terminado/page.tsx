@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Box,
@@ -16,6 +16,7 @@ import {
   TableRow,
   Paper,
   Button,
+  CircularProgress,
 } from "@mui/material";
 
 import AddBoxIcon from "@mui/icons-material/AddBox";
@@ -33,7 +34,7 @@ interface Registro {
   tipo: "Reparacion" | "Terminado" | "Otro";
 }
 
-export default function TerminadoPage() {
+function TerminadoContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -42,7 +43,9 @@ export default function TerminadoPage() {
 
   // 🔄 Cargar trabajos terminados desde localStorage
   const cargarTerminados = () => {
-    const datos: Registro[] = JSON.parse(localStorage.getItem("registros") || "[]");
+    const datos: Registro[] = JSON.parse(
+      localStorage.getItem("registros") || "[]"
+    );
 
     // Solo mostrar registros de tipo "Terminado"
     const filtrados = datos.filter((r) => r.tipo === "Terminado");
@@ -65,7 +68,9 @@ export default function TerminadoPage() {
   const eliminarTerminado = (id: string) => {
     if (!confirm("¿Deseas eliminar este registro?")) return;
 
-    const todos: Registro[] = JSON.parse(localStorage.getItem("registros") || "[]");
+    const todos: Registro[] = JSON.parse(
+      localStorage.getItem("registros") || "[]"
+    );
     const actualizados = todos.filter((r) => r.id !== id);
 
     localStorage.setItem("registros", JSON.stringify(actualizados));
@@ -85,14 +90,22 @@ export default function TerminadoPage() {
   return (
     <Box sx={{ p: 3 }}>
       {/* Encabezado */}
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={2}
+      >
         <Typography variant="h5" fontWeight="bold" sx={{ color: "#00897b" }}>
           Trabajos Terminados
         </Typography>
         <Button
           variant="contained"
           startIcon={<AddBoxIcon />}
-          sx={{ backgroundColor: "#00897b", "&:hover": { backgroundColor: "#00695c" } }}
+          sx={{
+            backgroundColor: "#00897b",
+            "&:hover": { backgroundColor: "#00695c" },
+          }}
           onClick={() => router.push("/formularios?recargar=true")}
         >
           Nuevo Registro
@@ -119,11 +132,21 @@ export default function TerminadoPage() {
         <Table>
           <TableHead>
             <TableRow sx={{ backgroundColor: "#00897b" }}>
-              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>ID</TableCell>
-              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>Cliente</TableCell>
-              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>Detalle</TableCell>
-              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>Estado</TableCell>
-              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>Acciones</TableCell>
+              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+                ID
+              </TableCell>
+              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+                Cliente
+              </TableCell>
+              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+                Detalle
+              </TableCell>
+              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+                Estado
+              </TableCell>
+              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+                Acciones
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -135,13 +158,22 @@ export default function TerminadoPage() {
                   <TableCell>{row.detalle}</TableCell>
                   <TableCell>{row.estado}</TableCell>
                   <TableCell>
-                    <IconButton color="primary" onClick={() => verTerminado(row.id)}>
+                    <IconButton
+                      color="primary"
+                      onClick={() => verTerminado(row.id)}
+                    >
                       <VisibilityIcon />
                     </IconButton>
-                    <IconButton color="warning" onClick={() => editarTerminado(row.id)}>
+                    <IconButton
+                      color="warning"
+                      onClick={() => editarTerminado(row.id)}
+                    >
                       <EditIcon />
                     </IconButton>
-                    <IconButton color="error" onClick={() => eliminarTerminado(row.id)}>
+                    <IconButton
+                      color="error"
+                      onClick={() => eliminarTerminado(row.id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -158,5 +190,27 @@ export default function TerminadoPage() {
         </Table>
       </TableContainer>
     </Box>
+  );
+}
+
+export default function TerminadoPage() {
+  return (
+    <Suspense
+      fallback={
+        <Box
+          sx={{
+            p: 3,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
+          <CircularProgress sx={{ color: "#00897b" }} />
+        </Box>
+      }
+    >
+      <TerminadoContent />
+    </Suspense>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Box,
@@ -53,7 +53,7 @@ interface EquipoForm {
   estado: string;
 }
 
-export default function FormularioEquipoPage() {
+function FormularioEquipoContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams?.get("id");
@@ -421,5 +421,25 @@ export default function FormularioEquipoPage() {
         )}
       </Paper>
     </Box>
+  );
+}
+
+export default function FormularioEquipoPage() {
+  return (
+    <Suspense fallback={
+      <Box
+        sx={{
+          p: 3,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+        }}
+      >
+        <CircularProgress sx={{ color: "#1976d2" }} />
+      </Box>
+    }>
+      <FormularioEquipoContent />
+    </Suspense>
   );
 }

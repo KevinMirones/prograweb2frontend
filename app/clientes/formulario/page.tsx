@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Box,
@@ -25,7 +25,8 @@ interface Cliente {
   created_at: string;
 }
 
-export default function FormularioClientePage() {
+// Componente de contenido que usa useSearchParams
+function FormularioClienteContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams?.get("id");
@@ -266,5 +267,26 @@ export default function FormularioClientePage() {
         )}
       </Paper>
     </Box>
+  );
+}
+
+// Componente principal con Suspense
+export default function FormularioClientePage() {
+  return (
+    <Suspense fallback={
+      <Box
+        sx={{
+          p: 3,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+        }}
+      >
+        <CircularProgress sx={{ color: "#00897b" }} />
+      </Box>
+    }>
+      <FormularioClienteContent />
+    </Suspense>
   );
 }

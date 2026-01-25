@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Box,
@@ -33,7 +33,7 @@ interface TecnicoForm {
   fecha_ingreso: string;
 }
 
-export default function FormularioTecnicoPage() {
+function FormularioTecnicoContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams?.get("id");
@@ -326,5 +326,27 @@ export default function FormularioTecnicoPage() {
         )}
       </Paper>
     </Box>
+  );
+}
+
+export default function FormularioTecnicoPage() {
+  return (
+    <Suspense
+      fallback={
+        <Box
+          sx={{
+            p: 3,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
+          <CircularProgress sx={{ color: "#ed6c02" }} />
+        </Box>
+      }
+    >
+      <FormularioTecnicoContent />
+    </Suspense>
   );
 }

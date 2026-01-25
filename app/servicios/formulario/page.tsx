@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Box,
@@ -31,7 +31,7 @@ interface ServicioForm {
   precio: number;
 }
 
-export default function FormularioServicioPage() {
+function FormularioServicioContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams?.get("id");
@@ -323,5 +323,27 @@ export default function FormularioServicioPage() {
         )}
       </Paper>
     </Box>
+  );
+}
+
+export default function FormularioServicioPage() {
+  return (
+    <Suspense
+      fallback={
+        <Box
+          sx={{
+            p: 3,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
+          <CircularProgress sx={{ color: "#2e7d32" }} />
+        </Box>
+      }
+    >
+      <FormularioServicioContent />
+    </Suspense>
   );
 }

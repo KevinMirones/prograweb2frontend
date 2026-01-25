@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   Box,
@@ -71,7 +71,8 @@ interface Cotizacion {
   id_trabajo: number | null;
 }
 
-export default function ImprimirCotizacionPage() {
+// Componente que usa useSearchParams
+function ImprimirCotizacionContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams?.get("id");
@@ -563,5 +564,26 @@ export default function ImprimirCotizacionPage() {
         </Box>
       </Paper>
     </Box>
+  );
+}
+
+// Componente principal con Suspense
+export default function ImprimirCotizacionPage() {
+  return (
+    <Suspense fallback={
+      <Box
+        sx={{
+          p: 3,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+        }}
+      >
+        <CircularProgress sx={{ color: "#7b1fa2" }} />
+      </Box>
+    }>
+      <ImprimirCotizacionContent />
+    </Suspense>
   );
 }

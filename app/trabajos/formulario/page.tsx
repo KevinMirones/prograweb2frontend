@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Box,
@@ -76,7 +76,7 @@ interface TrabajoForm {
   id_tecnico: number;
 }
 
-export default function FormularioTrabajoPage() {
+function FormularioTrabajoContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams?.get("id");
@@ -925,5 +925,27 @@ export default function FormularioTrabajoPage() {
         </DialogActions>
       </Dialog>
     </Box>
+  );
+}
+
+export default function FormularioTrabajoPage() {
+  return (
+    <Suspense
+      fallback={
+        <Box
+          sx={{
+            p: 3,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
+          <CircularProgress sx={{ color: "#f57c00" }} />
+        </Box>
+      }
+    >
+      <FormularioTrabajoContent />
+    </Suspense>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Box,
@@ -79,7 +79,8 @@ interface CotizacionForm {
 // Estados válidos
 const ESTADOS_VALIDOS = ["Abierta", "Aceptada", "Rechazada", "Expirada"];
 
-export default function FormularioCotizacionPage() {
+// Componente que usa useSearchParams
+function FormularioCotizacionContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams?.get("id");
@@ -1022,5 +1023,26 @@ export default function FormularioCotizacionPage() {
         </DialogActions>
       </Dialog>
     </Box>
+  );
+}
+
+// Componente principal con Suspense
+export default function FormularioCotizacionPage() {
+  return (
+    <Suspense fallback={
+      <Box
+        sx={{
+          p: 3,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+        }}
+      >
+        <CircularProgress sx={{ color: "#7b1fa2" }} />
+      </Box>
+    }>
+      <FormularioCotizacionContent />
+    </Suspense>
   );
 }

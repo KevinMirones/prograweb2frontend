@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Suspense } from "react";
 import {
   Box,
   Typography,
@@ -21,6 +22,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  CircularProgress,
 } from "@mui/material";
 
 import AddBoxIcon from "@mui/icons-material/AddBox";
@@ -54,7 +56,7 @@ interface Cotizacion {
   tipo: string;
 }
 
-export default function FormularioPage() {
+function FormularioContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -146,56 +148,57 @@ export default function FormularioPage() {
     if (readOnly) return;
     setServicios(servicios.filter((_, i) => i !== index));
   };
-// Solo cambia la función handleGuardar para sincronizar `tipo` con el `estado`
 
-const handleGuardar = () => {
-  if (!cliente || !telefono || !equipo || !numeroCarnet) {
-    alert("Por favor completa todos los campos obligatorios");
-    return;
-  }
+  // Solo cambia la función handleGuardar para sincronizar `tipo` con el `estado`
+  const handleGuardar = () => {
+    if (!cliente || !telefono || !equipo || !numeroCarnet) {
+      alert("Por favor completa todos los campos obligatorios");
+      return;
+    }
 
-  // Determinar el tipo según el estado
-  let tipoRegistro = "Reparacion";
-  if (estado === "Terminado") tipoRegistro = "Terminado";
-  else if (estado === "Entregado") tipoRegistro = "Entregado";
-  // Puedes agregar más reglas si hay otros estados que cambien el tipo
+    // Determinar el tipo según el estado
+    let tipoRegistro = "Reparacion";
+    if (estado === "Terminado") tipoRegistro = "Terminado";
+    else if (estado === "Entregado") tipoRegistro = "Entregado";
+    // Puedes agregar más reglas si hay otros estados que cambien el tipo
 
-  const nuevaCotizacion: Cotizacion = {
-    id: id || Date.now().toString(),
-    ci: numeroCarnet,
-    cliente,
-    detalle: problema || "(sin detalle)",
-    estado,
-    telefono,
-    equipo,
-    marca,
-    modelo,
-    servicios,
-    total,
-    validoHasta,
-    garantia,
-    firma,
-    tipo: tipoRegistro, // <-- aquí se sincroniza con el estado
+    const nuevaCotizacion: Cotizacion = {
+      id: id || Date.now().toString(),
+      ci: numeroCarnet,
+      cliente,
+      detalle: problema || "(sin detalle)",
+      estado,
+      telefono,
+      equipo,
+      marca,
+      modelo,
+      servicios,
+      total,
+      validoHasta,
+      garantia,
+      firma,
+      tipo: tipoRegistro, // <-- aquí se sincroniza con el estado
+    };
+
+    try {
+      const data = localStorage.getItem("registros");
+      let registros: Cotizacion[] = data ? JSON.parse(data) : [];
+
+      registros = registros.filter((r) => r.id !== nuevaCotizacion.id);
+      registros.push(nuevaCotizacion);
+
+      localStorage.setItem("registros", JSON.stringify(registros));
+
+      alert("✅ Registro guardado correctamente");
+
+      limpiarFormulario();
+      router.push("/cotizacion");
+    } catch (error) {
+      console.error("Error al guardar:", error);
+      alert("❌ Error al guardar el registro. Revisa la consola.");
+    }
   };
 
-  try {
-    const data = localStorage.getItem("registros");
-    let registros: Cotizacion[] = data ? JSON.parse(data) : [];
-
-    registros = registros.filter((r) => r.id !== nuevaCotizacion.id);
-    registros.push(nuevaCotizacion);
-
-    localStorage.setItem("registros", JSON.stringify(registros));
-
-    alert("✅ Registro guardado correctamente");
-
-    limpiarFormulario();
-    router.push("/cotizacion");
-  } catch (error) {
-    console.error("Error al guardar:", error);
-    alert("❌ Error al guardar el registro. Revisa la consola.");
-  }
-};
   const handleCancelar = () => {
     if (readOnly) return;
     if (confirm("¿Deseas cancelar y borrar los datos ingresados?")) {
@@ -221,9 +224,19 @@ const handleGuardar = () => {
   return (
     <Box sx={{ p: 4, backgroundColor: "#f5f5f5", minHeight: "100vh" }}>
       <Paper elevation={3} sx={{ p: 4, maxWidth: 900, margin: "auto" }}>
-        <Box display="flex" alignItems="center" justifyContent="space-between" mb={3}>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={3}
+        >
           <Box display="flex" alignItems="center" gap={2}>
-            <Image src="/logo-tiluchi.png" alt="Tiluchi Logo" width={60} height={60} />
+            <Image
+              src="/logo-tiluchi.png"
+              alt="Tiluchi Logo"
+              width={60}
+              height={60}
+            />
             <Typography variant="h5" fontWeight="bold" color="#1565c0">
               COTIZACIÓN DE SERVICIO TÉCNICO
             </Typography>
@@ -284,15 +297,33 @@ const handleGuardar = () => {
         <Box display="flex" gap={2} mb={3}>
           <FormControl fullWidth disabled={readOnly}>
             <InputLabel>Equipo</InputLabel>
-            <Select value={equipo} label="Equipo" onChange={(e) => setEquipo(e.target.value)}>
-              <MenuItem value="Desktop / Escritorio">Desktop / Escritorio</MenuItem>
+            <Select
+              value={equipo}
+              label="Equipo"
+              onChange={(e) => setEquipo(e.target.value)}
+            >
+              <MenuItem value="Desktop / Escritorio">
+                Desktop / Escritorio
+              </MenuItem>
               <MenuItem value="Laptop">Laptop</MenuItem>
               <MenuItem value="Celular">Celular</MenuItem>
               <MenuItem value="Tablet">Tablet</MenuItem>
             </Select>
           </FormControl>
-          <TextField fullWidth label="Marca" value={marca} onChange={(e) => setMarca(e.target.value)} disabled={readOnly} />
-          <TextField fullWidth label="Modelo" value={modelo} onChange={(e) => setModelo(e.target.value)} disabled={readOnly} />
+          <TextField
+            fullWidth
+            label="Marca"
+            value={marca}
+            onChange={(e) => setMarca(e.target.value)}
+            disabled={readOnly}
+          />
+          <TextField
+            fullWidth
+            label="Modelo"
+            value={modelo}
+            onChange={(e) => setModelo(e.target.value)}
+            disabled={readOnly}
+          />
         </Box>
 
         <Typography variant="h6" fontWeight="bold" gutterBottom>
@@ -313,7 +344,13 @@ const handleGuardar = () => {
           Servicios
         </Typography>
         {!readOnly && (
-          <Button variant="contained" color="success" startIcon={<AddBoxIcon />} onClick={() => handleOpenModal()} className="no-print">
+          <Button
+            variant="contained"
+            color="success"
+            startIcon={<AddBoxIcon />}
+            onClick={() => handleOpenModal()}
+            className="no-print"
+          >
             Agregar Servicio
           </Button>
         )}
@@ -321,11 +358,21 @@ const handleGuardar = () => {
         <Table size="small" sx={{ my: 3 }}>
           <TableHead>
             <TableRow sx={{ backgroundColor: "#1565c0" }}>
-              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>Servicio</TableCell>
-              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>Cantidad</TableCell>
-              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>Precio Unitario (Bs)</TableCell>
-              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>Total (Bs)</TableCell>
-              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>Acción</TableCell>
+              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+                Servicio
+              </TableCell>
+              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+                Cantidad
+              </TableCell>
+              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+                Precio Unitario (Bs)
+              </TableCell>
+              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+                Total (Bs)
+              </TableCell>
+              <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+                Acción
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -338,10 +385,18 @@ const handleGuardar = () => {
                 <TableCell>
                   {!readOnly && (
                     <>
-                      <Button color="primary" onClick={() => handleOpenModal(index)} startIcon={<EditIcon />}>
+                      <Button
+                        color="primary"
+                        onClick={() => handleOpenModal(index)}
+                        startIcon={<EditIcon />}
+                      >
                         Editar
                       </Button>
-                      <Button color="error" onClick={() => eliminarServicio(index)} startIcon={<DeleteIcon />}>
+                      <Button
+                        color="error"
+                        onClick={() => eliminarServicio(index)}
+                        startIcon={<DeleteIcon />}
+                      >
                         Eliminar
                       </Button>
                     </>
@@ -361,31 +416,67 @@ const handleGuardar = () => {
         <Box display="flex" alignItems="center" gap={2} mb={3}>
           <FormControl fullWidth disabled={readOnly}>
             <InputLabel>Estado</InputLabel>
-            <Select value={estado} label="Estado" onChange={(e) => setEstado(e.target.value)}>
+            <Select
+              value={estado}
+              label="Estado"
+              onChange={(e) => setEstado(e.target.value)}
+            >
               <MenuItem value="Pendiente">Pendiente</MenuItem>
               <MenuItem value="Aceptado">Aceptado</MenuItem>
               <MenuItem value="Expirado">Expirado</MenuItem>
               <MenuItem value="Rechazado">Rechazado</MenuItem>
-              <MenuItem value="Terminado">Terminado</MenuItem>   
-              <MenuItem value="Entregado">Entregado</MenuItem>    
+              <MenuItem value="Terminado">Terminado</MenuItem>
+              <MenuItem value="Entregado">Entregado</MenuItem>
             </Select>
           </FormControl>
-          <TextField fullWidth label="Firma del Cliente" value={firma} onChange={(e) => setFirma(e.target.value)} disabled={readOnly} />
+          <TextField
+            fullWidth
+            label="Firma del Cliente"
+            value={firma}
+            onChange={(e) => setFirma(e.target.value)}
+            disabled={readOnly}
+          />
         </Box>
 
         {!readOnly && (
-          <Box display="flex" justifyContent="center" gap={2} mt={3} className="no-print">
-            <Button variant="contained" color="success" sx={{ px: 4 }} onClick={handleGuardar}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            gap={2}
+            mt={3}
+            className="no-print"
+          >
+            <Button
+              variant="contained"
+              color="success"
+              sx={{ px: 4 }}
+              onClick={handleGuardar}
+            >
               GUARDAR
             </Button>
-            <Button variant="contained" color="error" sx={{ px: 4 }} onClick={handleCancelar}>
+            <Button
+              variant="contained"
+              color="error"
+              sx={{ px: 4 }}
+              onClick={handleCancelar}
+            >
               CANCELAR
             </Button>
           </Box>
         )}
 
-        <Box display="flex" justifyContent="center" mt={3} className="no-print">
-          <Button variant="contained" color="primary" sx={{ px: 4 }} onClick={() => window.print()}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          mt={3}
+          className="no-print"
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ px: 4 }}
+            onClick={() => window.print()}
+          >
             IMPRIMIR
           </Button>
         </Box>
@@ -403,14 +494,18 @@ const handleGuardar = () => {
       </Paper>
 
       <Dialog open={openModal} onClose={() => setOpenModal(false)}>
-        <DialogTitle>{editIndex !== null ? "Editar Servicio" : "Agregar Servicio"}</DialogTitle>
+        <DialogTitle>
+          {editIndex !== null ? "Editar Servicio" : "Agregar Servicio"}
+        </DialogTitle>
         <DialogContent sx={{ minWidth: 400 }}>
           <TextField
             margin="dense"
             label="Servicio"
             fullWidth
             value={servicioForm.servicio}
-            onChange={(e) => setServicioForm({ ...servicioForm, servicio: e.target.value })}
+            onChange={(e) =>
+              setServicioForm({ ...servicioForm, servicio: e.target.value })
+            }
           />
           <TextField
             margin="dense"
@@ -418,7 +513,12 @@ const handleGuardar = () => {
             type="number"
             fullWidth
             value={servicioForm.cantidad}
-            onChange={(e) => setServicioForm({ ...servicioForm, cantidad: parseInt(e.target.value) })}
+            onChange={(e) =>
+              setServicioForm({
+                ...servicioForm,
+                cantidad: parseInt(e.target.value),
+              })
+            }
           />
           <TextField
             margin="dense"
@@ -426,7 +526,12 @@ const handleGuardar = () => {
             type="number"
             fullWidth
             value={servicioForm.precio}
-            onChange={(e) => setServicioForm({ ...servicioForm, precio: parseFloat(e.target.value) })}
+            onChange={(e) =>
+              setServicioForm({
+                ...servicioForm,
+                precio: parseFloat(e.target.value),
+              })
+            }
           />
         </DialogContent>
         <DialogActions>
@@ -437,5 +542,28 @@ const handleGuardar = () => {
         </DialogActions>
       </Dialog>
     </Box>
+  );
+}
+
+export default function FormularioPage() {
+  return (
+    <Suspense
+      fallback={
+        <Box
+          sx={{
+            p: 4,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+            backgroundColor: "#f5f5f5",
+          }}
+        >
+          <CircularProgress sx={{ color: "#1565c0" }} />
+        </Box>
+      }
+    >
+      <FormularioContent />
+    </Suspense>
   );
 }
