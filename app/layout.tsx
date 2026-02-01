@@ -1,7 +1,7 @@
 import "./globals.css";
 import { ReactNode } from "react";
-import { Box } from "@mui/material";
-import Sidebar from "./components/sidebar/sidebar";
+import ClientLayout from "./ClientLayout";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 
 export const metadata = {
   title: "Sistema de Mantenimiento",
@@ -13,14 +13,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
       <body>
-        <Box sx={{ display: "flex", minHeight: "100vh" }}>
-          {/* Menú lateral */}
-          <Sidebar />
-          {/* Contenido principal */}
-          <Box sx={{ flexGrow: 1, backgroundColor: "#f5f5f5", p: 3 }}>
-            {children}
-          </Box>
-        </Box>
+        <AppRouterCacheProvider>
+          <ClientLayout>
+              {children}
+          </ClientLayout>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

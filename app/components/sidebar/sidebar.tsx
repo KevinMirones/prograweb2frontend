@@ -8,6 +8,8 @@ import PeopleIcon from "@mui/icons-material/People";
 import ComputerIcon from "@mui/icons-material/Computer";
 import EngineeringIcon from "@mui/icons-material/Engineering";
 import HandymanIcon from "@mui/icons-material/Handyman";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Button from "@mui/material/Button";
 import { useRouter } from "next/navigation";
 
 export default function Sidebar() {
@@ -89,6 +91,29 @@ export default function Sidebar() {
         <Tab icon={<EngineeringIcon />} label="Técnicos" />
         <Tab icon={<HandymanIcon />} label="Servicios" />
       </Tabs>
+      
+      <Box sx={{ mt: "auto", mb: 2, width: "100%", px: 1 }}>
+        <Button
+          onClick={() => {
+            localStorage.removeItem("token");
+            router.push("/login");
+          }}
+          startIcon={<LogoutIcon />}
+          sx={{
+            color: "#e2e8f0",
+            width: "100%",
+            fontSize: "0.75rem",
+            textTransform: "none",
+            borderRadius: "8px",
+            "&:hover": {
+              backgroundColor: "rgba(255, 99, 71, 0.2)",
+              color: "#ff6347",
+            },
+          }}
+        >
+          Salir
+        </Button>
+      </Box>
     </Box>
   );
 }
