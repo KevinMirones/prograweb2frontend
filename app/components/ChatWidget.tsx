@@ -56,9 +56,10 @@ export default function ChatWidget() {
     setIsLoading(true);
 
     const token = localStorage.getItem("token");
+    const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/chat`;
     
     try {
-      const response = await fetch("http://localhost:8080/api/v1/chat/", {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
