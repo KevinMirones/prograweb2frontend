@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
-import { Box, Tabs, Tab } from "@mui/material";
+import React from "react";
+import { Box, Tabs, Tab, Drawer, useTheme, useMediaQuery } from "@mui/material";
 import BuildIcon from "@mui/icons-material/Build";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import PeopleIcon from "@mui/icons-material/People";
@@ -12,12 +12,22 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/navigation";
 
-export default function Sidebar() {
+const drawerWidth = 120; // Reduced width for icon-focused sidebar
+
+interface SidebarProps {
+  mobileOpen?: boolean;
+  onClose?: () => void;
+}
+
+export default function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
   const [value, setValue] = React.useState(0);
   const router = useRouter();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    if (isMobile && onClose) onClose();
 
     switch (newValue) {
       case 0:
@@ -41,18 +51,18 @@ export default function Sidebar() {
     }
   };
 
-  return (
+  const drawerContent = (
     <Box
       className="no-print"
       sx={{
-        height: "100vh",
-        width: 120,
-        backgroundColor: "#1e293b", // Color más uniforme y moderno
+        height: "100%",
+        width: drawerWidth,
+        backgroundColor: "#1e293b",
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
         py: 2,
-        background: "linear-gradient(180deg, #0a2145ff 0%, #334155 100%)", // Gradiente sutil para más profundidad
+        background: "linear-gradient(180deg, #0a2145ff 0%, #334155 100%)",
       }}
     >
       <Tabs
@@ -61,7 +71,7 @@ export default function Sidebar() {
         onChange={handleChange}
         sx={{
           "& .MuiTab-root": {
-            color: "#e2e8f0", // Color más suave para el texto
+            color: "#e2e8f0",
             minWidth: "100%",
             borderRadius: "8px",
             mb: 2,
@@ -69,18 +79,18 @@ export default function Sidebar() {
             fontWeight: 500,
             transition: "all 0.2s ease-in-out",
             "&:hover": {
-              backgroundColor: "rgba(255, 255, 255, 0.28)", // Efecto hover sutil
+              backgroundColor: "rgba(255, 255, 255, 0.28)",
               transform: "translateY(-1px)",
             },
           },
           "& .Mui-selected": {
-            backgroundColor: "#385686ff", // Azul moderno en lugar de verde
+            backgroundColor: "#385686ff",
             color: "#ffffff",
             fontWeight: 600,
             boxShadow: "0 2px 4px rgba(59, 130, 246, 0.3)",
           },
           "& .MuiTabs-indicator": {
-            display: "none", // Oculta el indicador por defecto de MUI
+            display: "none",
           },
         }}
       >
@@ -114,6 +124,38 @@ export default function Sidebar() {
           Salir
         </Button>
       </Box>
+    </Box>
+  );
+
+  return (
+    <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+      {/* Mobile Drawer */}
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={onClose}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          display: { xs: "block", sm: "none" },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+        }}
+      >
+        {drawerContent}
+      </Drawer>
+
+      {/* Desktop Drawer */}
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: "none", sm: "block" },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+        }}
+        open
+      >
+        {drawerContent}
+      </Drawer>
     </Box>
   );
 }

@@ -14,6 +14,7 @@ import {
   Link,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { isValidEmail } from "../utils/validation";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -26,10 +27,21 @@ export default function RegisterPage() {
 
   const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/auth/register`;
   
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSuccess("");
+
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
