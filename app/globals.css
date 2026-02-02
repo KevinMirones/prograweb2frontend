@@ -4,30 +4,30 @@
 /* === 2️⃣ Variables globales de color y fuente === */
 :root {
   /* Colores base en modo claro */
-  --background: #ffffff;   /* Fondo blanco */
-  --foreground: #171717;   /* Texto gris oscuro */
+  --background: #ffffff; /* Fondo blanco */
+  --foreground: #171717; /* Texto gris oscuro */
 }
 
 /* === 3️⃣ Tema base que usa las variables anteriores === */
 @theme inline {
-  --color-background: var(--background);  /* Vincula el fondo global */
-  --color-foreground: var(--foreground);  /* Vincula el texto global */
-  --font-sans: var(--font-geist-sans);    /* Fuente principal */
-  --font-mono: var(--font-geist-mono);    /* Fuente monoespaciada */
+  --color-background: var(--background); /* Vincula el fondo global */
+  --color-foreground: var(--foreground); /* Vincula el texto global */
+  --font-sans: var(--font-geist-sans); /* Fuente principal */
+  --font-mono: var(--font-geist-mono); /* Fuente monoespaciada */
 }
 
 /* === 4️⃣ Soporte para modo oscuro automático === */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a; /* Fondo casi negro */
-    --foreground: #ededed; /* Texto claro */
+    --background: #1e4687; /* Fondo casi negro */
+    --foreground: #bdcbcb; /* Texto claro */
   }
 }
 
 /* === 5️⃣ Estilos base del cuerpo del documento === */
 body {
-  background: var(--background);     /* Usa el color de fondo global */
-  color: var(--foreground);          /* Usa el color de texto global */
+  background: var(--background); /* Usa el color de fondo global */
+  color: var(--foreground); /* Usa el color de texto global */
   font-family: Arial, Helvetica, sans-serif; /* Fuente legible y estándar */
 }
 
@@ -46,8 +46,8 @@ body {
 
   /* 🔹 Ajustes visuales para la impresión */
   body {
-    background: white !important;  /* Fondo blanco */
-    color: black !important;       /* Texto negro */
+    background: white !important; /* Fondo blanco */
+    color: black !important; /* Texto negro */
     -webkit-print-color-adjust: exact !important; /* Mantiene los colores originales */
     zoom: 0.85; /* Escala ligeramente el contenido para que todo entre en la hoja */
   }

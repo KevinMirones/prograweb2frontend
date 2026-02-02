@@ -80,6 +80,7 @@ export default function LoginPage() {
             flexDirection: "column",
             alignItems: "center",
             width: "100%",
+            bgcolor: "#ffffff",
           }}
         >
           <Typography component="h1" variant="h5">
