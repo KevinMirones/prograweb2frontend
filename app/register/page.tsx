@@ -26,7 +26,6 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/auth/register`;
-  
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,17 +33,17 @@ export default function RegisterPage() {
     setSuccess("");
 
     if (!isValidEmail(email)) {
-      setError("Please enter a valid email address.");
+      setError("Por favor ingresa una dirección de correo válida.");
       return;
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters long.");
+      setError("La contraseña debe tener al menos 6 caracteres.");
       return;
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError("Las contraseñas no coinciden.");
       return;
     }
 
@@ -64,10 +63,10 @@ export default function RegisterPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.detail || "Registration failed");
+        throw new Error(data.detail || "Registro fallido");
       }
 
-      setSuccess("Registration successful! Redirecting to login...");
+      setSuccess("¡Registro exitoso! Redirigiendo al inicio de sesión...");
       setTimeout(() => {
         router.push("/login");
       }, 2000);
@@ -94,12 +93,13 @@ export default function RegisterPage() {
             flexDirection: "column",
             alignItems: "center",
             width: "100%",
+            bgcolor: "#ffffff",
           }}
         >
           <Typography component="h1" variant="h5">
-            Sign Up
+            Registrarse
           </Typography>
-          
+
           {error && (
             <Alert severity="error" sx={{ mt: 2, width: "100%" }}>
               {error}
@@ -112,13 +112,17 @@ export default function RegisterPage() {
             </Alert>
           )}
 
-          <Box component="form" onSubmit={handleRegister} sx={{ mt: 1, width: "100%" }}>
+          <Box
+            component="form"
+            onSubmit={handleRegister}
+            sx={{ mt: 1, width: "100%" }}
+          >
             <TextField
               margin="normal"
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Correo electrónico"
               name="email"
               autoComplete="email"
               autoFocus
@@ -130,7 +134,7 @@ export default function RegisterPage() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Contraseña"
               type="password"
               id="password"
               autoComplete="new-password"
@@ -142,7 +146,7 @@ export default function RegisterPage() {
               required
               fullWidth
               name="confirmPassword"
-              label="Confirm Password"
+              label="Confirmar contraseña"
               type="password"
               id="confirmPassword"
               value={confirmPassword}
@@ -157,7 +161,7 @@ export default function RegisterPage() {
                   color="primary"
                 />
               }
-              label="Enable MFA (Multi-Factor Authentication)"
+              label="Activar MFA (Autenticación multifactor)"
             />
 
             <Button
@@ -166,11 +170,11 @@ export default function RegisterPage() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Registrarse
             </Button>
             <Box sx={{ textAlign: "center" }}>
               <Link href="/login" variant="body2">
-                {"Already have an account? Sign In"}
+                {"¿Ya tienes una cuenta? Inicia sesión"}
               </Link>
             </Box>
           </Box>

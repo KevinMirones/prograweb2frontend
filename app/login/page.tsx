@@ -48,7 +48,7 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.detail || "Login failed");
+        throw new Error(data.detail || "Error al iniciar sesión");
       }
 
       if (data.mfa_required) {
@@ -80,19 +80,24 @@ export default function LoginPage() {
             flexDirection: "column",
             alignItems: "center",
             width: "100%",
+            bgcolor: "#ffffff",
           }}
         >
           <Typography component="h1" variant="h5">
-            {isMfaRequired ? "MFA Verification" : "Sign in"}
+            {isMfaRequired ? "Verificación MFA" : "Iniciar sesión"}
           </Typography>
-          
+
           {error && (
             <Alert severity="error" sx={{ mt: 2, width: "100%" }}>
               {error}
             </Alert>
           )}
 
-          <Box component="form" onSubmit={handleLogin} sx={{ mt: 1, width: "100%" }}>
+          <Box
+            component="form"
+            onSubmit={handleLogin}
+            sx={{ mt: 1, width: "100%" }}
+          >
             {!isMfaRequired ? (
               <>
                 <TextField
@@ -100,7 +105,7 @@ export default function LoginPage() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Correo electrónico"
                   name="email"
                   autoComplete="email"
                   autoFocus
@@ -112,7 +117,7 @@ export default function LoginPage() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="Contraseña"
                   type="password"
                   id="password"
                   autoComplete="current-password"
@@ -123,14 +128,15 @@ export default function LoginPage() {
             ) : (
               <>
                 <Typography variant="body2" sx={{ mt: 2, mb: 2 }}>
-                  A verification code has been sent to your email.
+                  Se ha enviado un código de verificación a su correo
+                  electrónico.
                 </Typography>
                 <TextField
                   margin="normal"
                   required
                   fullWidth
                   name="mfaCode"
-                  label="Verification Code"
+                  label="Código de verificación"
                   id="mfaCode"
                   value={mfaCode}
                   onChange={(e) => setMfaCode(e.target.value)}
@@ -144,11 +150,11 @@ export default function LoginPage() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              {isMfaRequired ? "Verify" : "Sign In"}
+              {isMfaRequired ? "Verificar" : "Iniciar sesión"}
             </Button>
             <Box sx={{ textAlign: "center" }}>
               <Link href="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"¿No tienes una cuenta? Regístrate"}
               </Link>
             </Box>
           </Box>
